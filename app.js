@@ -4,11 +4,13 @@ const app = express();
 const router = require('./routes');
 const nunjucks = require('nunjucks');
 const bodyParser = require('body-parser');
+var fs = require('fs');
+var path = require('path');
 // ... other stuff
 
-models.User.sync({})
+models.User.sync()
 .then(function () {
-    return models.Page.sync({})
+    return models.Page.sync()
 })
 .then(function () {
     // make sure to replace the name below with your express app
@@ -24,6 +26,7 @@ app.use(bodyParser.json()); // would be for AJAX requests
 
 app.use('/', router);
 //CONNECT STATIC FOR PUBLIC FOLDER
+app.use(express.static(path.join(__dirname, '/public')));
 
 //ADD ENGINE VIEWS
 // templating boilerplate setup
