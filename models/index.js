@@ -28,12 +28,11 @@ var Page = db.define('page', {
   date: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
-  },
+  }
 
 });
 
 Page.hook ('beforeValidate',  (page, options) => {
-    console.log(page.title)
     if (page.title) {
         page.urlTitle =  page.title.replace(/\s+/g, '_').replace(/\W/g, '');
     } else {
